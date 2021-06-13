@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_food/Screens/splash.dart';
+import 'package:flutter_application_food/CustomerScreens/Home.dart';
 import 'package:flutter_application_food/constantes.dart';
+
+
 void main() {
   runApp(MyApp());
 }
@@ -32,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return SplashScreen();
+    return HomePage();
   }
 }
 

@@ -1,0 +1,26 @@
+void initState() {
+    super.initState();
+    _loadRestaurants();
+  }
+
+    Widget _buildRestauItem(BuildContext context, int index) {
+    return Card(
+      child: ListTile(
+         title: Text(_Restaurants[index]['name'],),
+            subtitle: Text(_Restaurants[index]['Phone'].toString(),),
+            
+      ),
+    );
+  }
+    _loadRestaurants() async {
+    var response = await Network().getData('/restaulist');
+    if (response.statusCode == 200) {
+      setState(() {
+        _Restaurants = json.decode(response.body);
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error ' + response.statusCode),
+      ));
+    }
+  }
