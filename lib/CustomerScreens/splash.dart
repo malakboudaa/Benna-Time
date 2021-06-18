@@ -1,9 +1,39 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_food/CustomerScreens/Login.dart';
+import 'package:flutter_application_food/utils/SharedPreferencesCustomer.dart';
 import 'package:flutter_application_food/widgets/Button.dart';
 
 
-class SplashScreen extends StatelessWidget {
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+   var loginText = '';
+
+    var sharedPreferencesC = new SharedPreferencesCustomer();
+
+ _checkLoggedInUser() async {
+    var token = await sharedPreferencesC.getAuthToken();
+    if (token != null) {
+      var user = await sharedPreferencesC.getCurrentUser();
+      setState(() {
+        loginText = 'Welcome ' + user['email'];
+      });
+    } else
+      setState(() {
+        loginText = 'No user logged in';
+      });
+  }
+    @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkLoggedInUser());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,25 +60,16 @@ class SplashScreen extends StatelessWidget {
                 SizedBox(height: 90),
                 Button(
                   press: () {
-                    Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) {
-                      return LoginScreen();
-                    },),);
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()))
+                  .then((_) => _checkLoggedInUser());
                   },
 
-                  text: "Client Account",
+                  text: "Are you hungry ? Start",
 
                 ),
-                SizedBox(height: 15,),
-                Button(
-                  press: () {
-                    Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) {
-                      return LoginScreen();
-                    },),);
-                  },
-                  text: "Restaurant account",
-                ),
+               
+                
               ],
             ),
           ),

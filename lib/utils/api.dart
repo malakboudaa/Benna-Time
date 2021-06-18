@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_application_food/utils/SharedPreferencesCustomer.dart';
 import 'package:http/http.dart' as http;
 
 class Network {
@@ -19,14 +20,15 @@ class Network {
   }
 
   getData(apiUrl) async {
+    token = SharedPreferencesCustomer().getAuthToken();
     var fullUrl = _baseUrl + apiUrl;
     //await _getToken();
     return await http.get(Uri.parse(fullUrl), headers: _setHeaders());
+    
   }
 
   postDataWithImage(data, apiUrl, filepath) async {
     var fullUrl = _baseUrl + apiUrl;
-
     Map<String, String> headers = {
       'Content-Type': 'multipart/form-data',
       'Accept': 'application/json',
@@ -53,4 +55,6 @@ class Network {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token'
       };
+      
+  
 }

@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_food/CustomerScreens/Fpswd.dart';
 import 'package:flutter_application_food/CustomerScreens/Home.dart';
+import 'package:flutter_application_food/CustomerScreens/SignUp.dart';
 import 'package:flutter_application_food/constantes.dart';
-import 'package:flutter_application_food/widgets/Button.dart';
 import 'package:flutter_application_food/utils/api.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,51 +17,6 @@ class _LoginScreenState extends State<LoginScreen> {
   var email;
   var password;
 
- 
-  _showMsg(msg) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(msg),
-      action: SnackBarAction(
-        label: 'Close',
-        onPressed: () {
-          // Some code to undo the change!
-        },
-      ),
-    ));
-  }
-
-  void _login() async {
-    // setState(() {
-    //   _isLoading = true;
-    // });
-    var data = {'email': email, 'password': password};
-
-    // var map = new Map<String, dynamic>();
-    // map['email'] = email;
-    // map['password'] = password;
-    var response = await Network().postData(data,'/login');
-
-    if (response.statusCode == 200) {
-      var body = json.decode(response.body);
-      _showMsg(response.body);
-
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString('token', json.encode(body['token']));
-      localStorage.setString('user', json.encode(body['user']));
-      // Navigator.push(
-      //   context,
-      //   new MaterialPageRoute(builder: (context) => Home()),
-      // );
-      //_showMsg(body['message']);
-      Navigator.pop(context);
-    } else {
-      _showMsg('Error ${response.statusCode}');
-    }
-
-    // setState(() {
-    //   _isLoading = false;
-    // });
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Image.asset('assets/images/Logo.png',
               height: 50,
               width: 200,),
+              SizedBox(height: 10,),
             Image.asset('assets/images/Signin.png',
               height: 300,
               width: 300,),
@@ -103,6 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Gris,
                   ),
                 ),
+                validator: (emailValue) {
+                  if (emailValue.isEmpty) {
+                    return 'Please enter email';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  email = value;
+                },
                 keyboardType: TextInputType.emailAddress,
 
               ),
@@ -136,21 +101,52 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Gris,
                   ),
                 ),
+                validator: (passwordValue) {
+                  if (passwordValue.isEmpty) {
+                    return 'Please enter password';
+                  }
+
+                  return null;
+                },
+                onChanged: (value) {
+                  password = value;
+                },
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
-               
-
-
               ),
             ),
 
             SizedBox(height: 25,),
-            Button(
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 15,
+                      color: Colors.grey.withOpacity(0.3),
+                      offset: Offset(0, 5),)
+                  ]),
+              child: FlatButton(
 
-              text: "Sign In",
-              press: () {
-                _login();
-              },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                minWidth: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 12),
+                color: Jaune,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()))
+                      .then((_) => _login(),);
+                },
+                child:
+                Text("Sign In ",
+                  style: TextStyle(fontSize: 17,
+                      color: Colors.white,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w400),
+                ),
+
+              ),
             ),
             SizedBox(height: 20,),
             RichText(text: TextSpan(
@@ -160,8 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.black),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (context) {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) {
                       return Fpswd();
                     },),);
                 },
@@ -178,18 +174,54 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Jaune),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) {
-                        return HomePage();
-                      },),);
+                      Navigator.push(
+                      context, MaterialPageRoute(builder: (context) {
+                      return SignUpScreen();
+                    },),);
                     },
                 ),
                 ),
               ],
             ),
-
           ],),
         ),),),
     );
   }
+
+  _showMsg(msg) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(msg),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () {
+          
+        },
+      ),
+    ));
+  }
+
+  void _login() async {
+   
+    var data = {'email': email, 'password': password};
+
+    var response = await Network().postData(data, '/login');
+    //getting the login route
+
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+      _showMsg(response.body);
+
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      //to save key value data 
+      localStorage.setString('token', json.encode(body['token']));
+      localStorage.setString('user', json.encode(body['user']));
+ 
+      Navigator.pop(context);
+    } else {
+      _showMsg('Error ${response.statusCode}');
+    }
+  }
 }
+
+
+
