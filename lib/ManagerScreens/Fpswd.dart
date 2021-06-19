@@ -1,11 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_food/CustomerScreens/Rpswd.dart';
+import 'package:flutter_application_food/ManagerScreens/Login.dart';
+import 'package:flutter_application_food/ManagerScreens/Rpswd.dart';
 import 'package:flutter_application_food/widgets/Button.dart';
-import 'package:flutter_application_food/constantes.dart';
 
+import '../constantes.dart';
 
-class Fpswd extends StatelessWidget {
+class Fpswd extends StatefulWidget {
+  
+
+  @override
+  _FpswdState createState() => _FpswdState();
+}
+
+class _FpswdState extends State<Fpswd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +87,10 @@ class Fpswd extends StatelessWidget {
                           color: Colors.black, fontSize: 18),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          
+                          Navigator.pushReplacement(
+                            context, MaterialPageRoute(builder: (context) {
+                            return LoginManager();
+                          },),);
                         },
                     )),
                   ],

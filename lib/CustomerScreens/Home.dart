@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_food/CustomerScreens/Category.dart';
-import 'package:flutter_application_food/CustomerScreens/Infomeal.dart';
 import 'package:flutter_application_food/CustomerScreens/Profile.dart';
 import 'package:flutter_application_food/CustomerScreens/RestauList.dart';
 import 'package:flutter_application_food/CustomerScreens/cart.dart';
@@ -27,6 +26,7 @@ class _HomePageState extends State<HomePage> {
    FontAwesomeIcons.hotdog,
    FontAwesomeIcons.iceCream,  
  ];
+ // var restaurant = [];
   
   var _restau = [
     {
@@ -63,6 +63,11 @@ class _HomePageState extends State<HomePage> {
 
     
   ];
+   //@override
+  //void initState() {
+    //super.initState();
+    //_loadrestaurants();
+  //}
   
   
  Widget _buildIcon (int index){
@@ -70,24 +75,18 @@ class _HomePageState extends State<HomePage> {
    onTap: (){
      setState(() {
        Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Categories()));
-               
-
-     });
-            
-   },
+                  MaterialPageRoute(builder: (context) => Categories()));});
+                  },
    child: Container(
      height: 60.0,
      width: 60.0,
      decoration: BoxDecoration(
-       boxShadow: [ BoxShadow(
-                    blurRadius: 15,
-                    color: Colors.grey.withOpacity(0.3),
-                    offset: Offset(2, 3),)
-                  ],
-   color: Colors.white,
-   borderRadius: BorderRadius.circular(30.0),
-          
+       boxShadow: [ BoxShadow(  
+         blurRadius: 15,
+         color: Colors.grey.withOpacity(0.3),
+         offset: Offset(2, 3),)],
+     color: Colors.white,
+     borderRadius: BorderRadius.circular(30.0),          
    ) ,
    child:Icon(
      _icons[index],
@@ -95,7 +94,7 @@ class _HomePageState extends State<HomePage> {
      color: Jaune,
    ) ,
    ),
-     );
+  );
  }
   @override
 
@@ -111,7 +110,7 @@ class _HomePageState extends State<HomePage> {
             text: TextSpan(
               style: 
                   
-                TextStyle(fontWeight: FontWeight.bold ,fontFamily: "Montserrat"),
+                TextStyle(fontWeight: FontWeight.bold ,fontFamily: 'Montserrat'),
               children: [
                 TextSpan(
                   text: "Hello, ",
@@ -229,7 +228,6 @@ class _HomePageState extends State<HomePage> {
                     context, MaterialPageRoute(builder: (context) {
                     return Categories();
                   },),);
-
           },
           child: Container(
             decoration: BoxDecoration(
@@ -311,14 +309,8 @@ class _HomePageState extends State<HomePage> {
           
         }
         ),
-
-       
-      
-      ),
-      
+      ),      
        ],  
-       
-
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentTab,
@@ -331,7 +323,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(
+                Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return HomePage();
                     },),);
@@ -347,7 +339,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon:IconButton(
               onPressed: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(
+                Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return Cart();
                     },),);
@@ -363,7 +355,7 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: IconButton(
               onPressed: (){
-                 Navigator.pushReplacement(context, MaterialPageRoute(
+                 Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return Profile();
                     },),);
@@ -383,6 +375,18 @@ class _HomePageState extends State<HomePage> {
       
     
   }
+  //_loadrestaurants() async {
+    //var response = await Network().getData('/restaulist');
+    //if (response.statusCode == 200) {
+      //setState(() {
+        //_cat = json.decode(response.body);
+      //});
+    //} else {
+      //ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+       //content: Text('Error ' + response.statusCode),
+      //));
+    //}
+  //}
   
   
     

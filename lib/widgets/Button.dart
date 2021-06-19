@@ -25,6 +25,7 @@ class Button extends StatelessWidget {
             offset: Offset(0,5), )]),
             child: FlatButton(
               
+              
              shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))),
               minWidth: double.infinity,
             padding: EdgeInsets.symmetric(vertical: 12),

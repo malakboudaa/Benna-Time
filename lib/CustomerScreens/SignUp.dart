@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_food/CustomerScreens/Login.dart';
 import 'package:flutter_application_food/CustomerScreens/splash.dart';
 import 'package:flutter_application_food/constantes.dart';
+import 'package:flutter_application_food/utils/api.dart';
 import 'package:flutter_application_food/widgets/Button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -165,5 +169,10 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),),
     );
+    
   }
+  
+  
+  
 }
+ 

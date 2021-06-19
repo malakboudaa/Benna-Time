@@ -1,6 +1,7 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_food/ManagerScreens/Homepage.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../constantes.dart';
@@ -72,24 +73,23 @@ class _RestauPicState extends State<RestauPic> {
               FloatingActionButton(
                 backgroundColor: Jaune,
                 onPressed: getImage,
-                tooltip: "pickImage",
                 child: Icon(Icons.add_a_photo),
               ),
               FloatingActionButton(
                 backgroundColor: Jaune,
                 onPressed: getImageGal,
-                tooltip: "Pick Image",
+                
                 child: Icon(Icons.camera_alt),
               ),
               FloatingActionButton(
                 backgroundColor: Jaune,
                 onPressed: (){
-                   Navigator.pushReplacement(
+                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) {
-                      return CreateProfile();
+                      return HomePage();
                     },),);
                 },
-                tooltip: "Pick Image",
+               
                 child: Icon(Icons.arrow_forward),
               )
             ],

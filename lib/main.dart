@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_food/CustomerScreens/cart.dart';
-
+import 'package:flutter_application_food/CustomerScreens/splash.dart';
+import 'package:flutter_application_food/ManagerScreens/Splash.dart';
 import 'package:flutter_application_food/constantes.dart';
 
-import 'CustomerScreens/gps.dart';
+
 
 
 void main() {
@@ -38,7 +38,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Cart();
+    return Splash();
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_food/ManagerScreens/Login.dart';
 import 'package:flutter_application_food/widgets/Button.dart';
 import '../constantes.dart';
 import 'Createprofile.dart';
@@ -131,7 +132,7 @@ class SignUpScreen extends StatelessWidget {
             SizedBox(height: 25,),
             Button(
               press: () {
-                 Navigator.pushReplacement(
+                 Navigator.push(
                       context, MaterialPageRoute(builder: (context) {
                       return CreateProfile();
                     },),);
@@ -151,6 +152,10 @@ class SignUpScreen extends StatelessWidget {
                       color: Jaune),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
+                      Navigator.push(
+                      context, MaterialPageRoute(builder: (context) {
+                      return LoginManager();
+                    },),);
                       
                     },
                 )),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_food/ManagerScreens/Login.dart';
 import 'package:flutter_application_food/ManagerScreens/SignUp.dart';
 import 'package:flutter_application_food/utils/SharedPreferencesManager.dart';
 import 'package:flutter_application_food/widgets/Button.dart';
@@ -39,29 +40,29 @@ class _SplashScreenState extends State<Splash> {
       body: Center(
         child: Padding(padding: EdgeInsets.symmetric(horizontal: 30.0),
         child: SingleChildScrollView(child: Column(children: [
-          Image.asset("assets/myLogo.png"),
+          Image.asset("assets/images/Logo.png"),
           SizedBox(height: 180,),
         
         Button(
                   press: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context, MaterialPageRoute(builder: (context) {
                       return SignUpScreen();
                     },),);
                   },
 
-                  text: "Start creating your own restaurant ",
+                  text: "Create Restaurant ",
 
                 ),
                 SizedBox(height: 30,),
                  Button(
                   press: () {
                     Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Splash()))
+                      MaterialPageRoute(builder: (context) => LoginManager()))
                   .then((_) => _checkLoggedInUser());
                   },
 
-                  text: " If you already have one, click here ",
+                  text: " Already have one ",
 
                 ),
                 

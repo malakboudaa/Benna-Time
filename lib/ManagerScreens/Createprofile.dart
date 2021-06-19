@@ -181,7 +181,7 @@ class _CreateProfileState extends State<CreateProfile> {
 
         Button(
                   press: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context, MaterialPageRoute(builder: (context) {
                       return RestauPic();
                     },),);

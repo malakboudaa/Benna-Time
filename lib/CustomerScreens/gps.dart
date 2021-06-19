@@ -46,10 +46,9 @@ class _GpsState extends State<Gps> {
                 SizedBox(height: 90),
                 Button(
                   press: () {
-                    getCurrentLocation();
-
-                    
-                    
+                    Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()))
+                      .then((_) => getCurrentLocation(),);
                   },
 
                   text: "Activate your localisation ",
